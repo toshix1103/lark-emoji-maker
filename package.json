@@ -1,0 +1,11 @@
+{
+  "name": "lark-emoji-maker",
+  "version": "0.1.0",
+  "description": "Lark用絵文字・アイコンメーカー",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "node src/index.js",
+    "build": "echo 'ビルドスクリプトを設定してください'"
+  },
+  "dependencies": {}
+}

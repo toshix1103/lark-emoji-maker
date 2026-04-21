@@ -1,0 +1,477 @@
+/* リセット & 基本 */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Noto Sans JP', -apple-system, sans-serif;
+  background: #f5f6fa;
+  color: #2d3436;
+  min-height: 100vh;
+}
+
+/* ヘッダー */
+header {
+  text-align: center;
+  padding: 24px 16px 8px;
+}
+
+header h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #2d3436;
+}
+
+.subtitle {
+  font-size: 0.85rem;
+  color: #636e72;
+  margin-top: 4px;
+}
+
+/* メイン */
+main {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 16px 32px;
+}
+
+/* タブ */
+.tabs {
+  display: flex;
+  gap: 0;
+  margin: 16px 0;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 2px solid #3498db;
+}
+
+.tab {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  background: #fff;
+  color: #3498db;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tab.active {
+  background: #3498db;
+  color: #fff;
+}
+
+/* セクション共通 */
+section {
+  background: #fff;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+/* サイズプリセット */
+.size-preset label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #636e72;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.preset-buttons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.preset {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 10px 12px;
+  border: 2px solid #dfe6e9;
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+}
+
+.preset:hover {
+  border-color: #3498db;
+}
+
+.preset.active {
+  border-color: #3498db;
+  background: #ebf5fb;
+}
+
+.preset-name {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #2d3436;
+}
+
+.preset-size {
+  font-size: 0.75rem;
+  color: #636e72;
+  margin-top: 2px;
+}
+
+.preset-note {
+  font-size: 0.7rem;
+  color: #b2bec3;
+  margin-top: 2px;
+}
+
+.custom-size {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+}
+
+.custom-size input {
+  width: 72px;
+  padding: 6px 8px;
+  border: 1px solid #dfe6e9;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+/* コントロール共通 */
+.control-group {
+  margin-bottom: 12px;
+}
+
+.control-group label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #636e72;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.control-row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.control-row > .control-group {
+  flex: 1;
+}
+
+.control-row > input[type="range"] {
+  flex: 1;
+}
+
+/* テキストエリア */
+textarea {
+  width: 100%;
+  padding: 8px 12px;
+  border: 2px solid #dfe6e9;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: inherit;
+  resize: vertical;
+  transition: border-color 0.2s;
+}
+
+textarea:focus {
+  outline: none;
+  border-color: #3498db;
+}
+
+/* セレクト */
+select {
+  width: 100%;
+  padding: 8px 12px;
+  border: 2px solid #dfe6e9;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  background: #fff;
+  cursor: pointer;
+}
+
+select:focus {
+  outline: none;
+  border-color: #3498db;
+}
+
+/* 余白コントロール */
+.padding-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.padding-control input[type="range"] {
+  flex: 1;
+  margin-top: 0;
+}
+
+.padding-control span {
+  font-size: 0.85rem;
+  color: #636e72;
+  min-width: 28px;
+  text-align: right;
+  font-family: monospace;
+}
+
+/* カラー入力 */
+.color-input {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.color-input input[type="color"] {
+  width: 36px;
+  height: 36px;
+  border: 2px solid #dfe6e9;
+  border-radius: 6px;
+  cursor: pointer;
+  padding: 2px;
+}
+
+.color-input input[type="text"] {
+  width: 80px;
+  padding: 6px 8px;
+  border: 2px solid #dfe6e9;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-family: monospace;
+}
+
+/* チェックボックス */
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.8rem;
+  font-weight: 400 !important;
+  color: #636e72 !important;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+/* カラープリセット */
+.color-presets {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.color-swatch {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform 0.15s, border-color 0.15s;
+}
+
+.color-swatch:hover {
+  transform: scale(1.15);
+  border-color: #3498db;
+}
+
+/* ドロップゾーン */
+.drop-zone {
+  border: 2px dashed #b2bec3;
+  border-radius: 12px;
+  padding: 32px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-bottom: 12px;
+  color: #636e72;
+  font-size: 0.9rem;
+}
+
+.drop-zone:hover,
+.drop-zone.drag-over {
+  border-color: #3498db;
+  background: #ebf5fb;
+  color: #3498db;
+}
+
+.drop-zone.has-image {
+  padding: 12px;
+  border-style: solid;
+  border-color: #2ecc71;
+}
+
+.drop-zone img {
+  max-width: 100%;
+  max-height: 200px;
+  border-radius: 8px;
+}
+
+/* レンジスライダー */
+input[type="range"] {
+  -webkit-appearance: none;
+  height: 6px;
+  border-radius: 3px;
+  background: #dfe6e9;
+  outline: none;
+  margin-top: 8px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #3498db;
+  cursor: pointer;
+}
+
+#borderRadiusValue {
+  font-size: 0.85rem;
+  color: #636e72;
+  min-width: 32px;
+  text-align: right;
+  margin-top: 6px;
+}
+
+/* プレビュー */
+.preview-section {
+  text-align: center;
+}
+
+.preview-container {
+  display: inline-block;
+  margin-bottom: 12px;
+}
+
+.preview-bg {
+  display: inline-block;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #dfe6e9;
+}
+
+.checkerboard {
+  background-image:
+    linear-gradient(45deg, #e0e0e0 25%, transparent 25%),
+    linear-gradient(-45deg, #e0e0e0 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #e0e0e0 75%),
+    linear-gradient(-45deg, transparent 75%, #e0e0e0 75%);
+  background-size: 16px 16px;
+  background-position: 0 0, 0 8px, 8px -8px, -8px 0;
+}
+
+#previewCanvas {
+  display: block;
+  max-width: 464px;
+  max-height: 400px;
+}
+
+.preview-info {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 6px;
+  font-size: 0.75rem;
+  color: #636e72;
+}
+
+/* 表示サンプル */
+.preview-samples {
+  margin: 16px 0;
+}
+
+.preview-samples p {
+  font-size: 0.8rem;
+  color: #636e72;
+  margin-bottom: 8px;
+}
+
+.sample-sizes {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 16px;
+}
+
+.sample {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.sample span {
+  font-size: 0.7rem;
+  color: #b2bec3;
+}
+
+.sample-canvas {
+  border-radius: 4px;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+/* ダウンロードボタン */
+.download-btn {
+  width: 100%;
+  padding: 14px;
+  background: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.download-btn:hover {
+  background: #2980b9;
+}
+
+.download-btn:active {
+  transform: scale(0.98);
+}
+
+/* フッター */
+footer {
+  text-align: center;
+  padding: 16px;
+  font-size: 0.75rem;
+  color: #b2bec3;
+}
+
+/* ユーティリティ */
+.hidden {
+  display: none !important;
+}
+
+/* レスポンシブ */
+@media (max-width: 480px) {
+  .preset-buttons {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .control-row {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .sample-sizes {
+    gap: 10px;
+  }
+}

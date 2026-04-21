@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lark Emoji & Icon Maker</title>
+  <link rel="stylesheet" href="src/style.css">
+</head>
+<body>
+  <header>
+    <h1>Lark Emoji & Icon Maker</h1>
+    <p class="subtitle">テキストから絵文字を生成 / 画像をリサイズ</p>
+  </header>
+
+  <main>
+    <!-- モード切替タブ -->
+    <div class="tabs">
+      <button class="tab active" data-mode="text">テキストから作成</button>
+      <button class="tab" data-mode="image">画像をリサイズ</button>
+    </div>
+
+    <!-- サイズプリセット（共通） -->
+    <section class="size-preset">
+      <label>出力サイズ</label>
+      <div class="preset-buttons">
+        <button class="preset active" data-w="96" data-h="96" data-maxkb="100" data-label="Lark絵文字(正方形)">
+          <span class="preset-name">Lark 絵文字（正方形）</span>
+          <span class="preset-size">96 × 96px</span>
+          <span class="preset-note">PNG / 100KB以下</span>
+        </button>
+        <button class="preset" data-w="0" data-h="96" data-maxkb="100" data-label="Lark絵文字(横長)">
+          <span class="preset-name">Lark 絵文字（横長）</span>
+          <span class="preset-size">幅自動 × 96px</span>
+          <span class="preset-note">幅96〜464px / 100KB以下</span>
+        </button>
+        <button class="preset" data-w="240" data-h="240" data-maxkb="100" data-label="Larkアプリアイコン">
+          <span class="preset-name">Lark アプリアイコン</span>
+          <span class="preset-size">240 × 240px</span>
+          <span class="preset-note">PNG / 100KB以下 / 正方形のみ</span>
+        </button>
+        <button class="preset" data-w="400" data-h="400" data-maxkb="800" data-label="Larkスタンプ">
+          <span class="preset-name">Lark スタンプ</span>
+          <span class="preset-size">400 × 400px</span>
+          <span class="preset-note">GIF・JPEG / 800KB以下</span>
+        </button>
+        <button class="preset" data-w="128" data-h="128" data-maxkb="256" data-label="Slack/Discord絵文字">
+          <span class="preset-name">Slack / Discord</span>
+          <span class="preset-size">128 × 128px</span>
+          <span class="preset-note">PNG / 256KB以下</span>
+        </button>
+        <button class="preset" data-w="custom" data-h="custom" data-maxkb="0" data-label="カスタム">
+          <span class="preset-name">カスタム</span>
+          <span class="preset-size">自由入力</span>
+          <span class="preset-note"></span>
+        </button>
+      </div>
+      <div class="custom-size hidden">
+        <input type="number" id="customWidth" value="96" min="16" max="1024"> ×
+        <input type="number" id="customHeight" value="96" min="16" max="1024"> px
+      </div>
+    </section>
+
+    <!-- テキストモード -->
+    <section class="mode-panel" id="textPanel">
+      <div class="text-controls">
+        <div class="control-group">
+          <label for="emojiText">テキスト</label>
+          <textarea id="emojiText" rows="3" placeholder="確認&#10;します">確認&#10;します</textarea>
+        </div>
+
+        <div class="control-row">
+          <div class="control-group">
+            <label for="fontFamily">フォント</label>
+            <select id="fontFamily">
+              <option value="'Noto Sans JP', sans-serif" selected>Noto Sans JP</option>
+              <option value="'M PLUS Rounded 1c', sans-serif">M PLUS Rounded 1c</option>
+              <option value="'M PLUS 1p', sans-serif">M PLUS 1p</option>
+              <option value="'Zen Maru Gothic', sans-serif">Zen Maru Gothic</option>
+              <option value="'Kosugi Maru', sans-serif">こすぎ丸</option>
+              <option value="'Noto Serif JP', serif">Noto Serif JP</option>
+              <option value="'Sawarabi Mincho', serif">さわらび明朝</option>
+              <option value="Impact, sans-serif">Impact</option>
+              <option value="'Arial Black', sans-serif">Arial Black</option>
+            </select>
+          </div>
+          <div class="control-group">
+            <label for="fontWeight">太さ</label>
+            <select id="fontWeight">
+              <option value="400">Regular</option>
+              <option value="700" selected>Bold</option>
+              <option value="900">Black</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="control-row">
+          <div class="control-group">
+            <label for="textColor">文字色</label>
+            <div class="color-input">
+              <input type="color" id="textColor" value="#ec71a1">
+              <input type="text" id="textColorHex" value="#ec71a1" maxlength="7">
+            </div>
+          </div>
+          <div class="control-group">
+            <label for="bgColor">背景色</label>
+            <div class="color-input">
+              <input type="color" id="bgColor" value="#ffffff">
+              <input type="text" id="bgColorHex" value="#ffffff" maxlength="7">
+              <label class="checkbox-label">
+                <input type="checkbox" id="bgTransparent" checked> 透明
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="control-row">
+          <div class="control-group">
+            <label>余白</label>
+            <div class="padding-control">
+              <input type="range" id="paddingSlider" min="0" max="30" value="4">
+              <span id="paddingValue">4%</span>
+            </div>
+          </div>
+          <div class="control-group">
+            <label for="textAlign">配置</label>
+            <select id="textAlign">
+              <option value="left">左寄せ</option>
+              <option value="center" selected>中央</option>
+              <option value="right">右寄せ</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- カラープリセット -->
+        <div class="control-group">
+          <label>カラープリセット</label>
+          <div class="color-presets">
+            <button class="color-swatch" data-color="#ec71a1" style="background:#ec71a1" title="ピンク"></button>
+            <button class="color-swatch" data-color="#e74c3c" style="background:#e74c3c" title="赤"></button>
+            <button class="color-swatch" data-color="#e67e22" style="background:#e67e22" title="オレンジ"></button>
+            <button class="color-swatch" data-color="#f1c40f" style="background:#f1c40f" title="黄"></button>
+            <button class="color-swatch" data-color="#2ecc71" style="background:#2ecc71" title="緑"></button>
+            <button class="color-swatch" data-color="#1abc9c" style="background:#1abc9c" title="ティール"></button>
+            <button class="color-swatch" data-color="#3498db" style="background:#3498db" title="青"></button>
+            <button class="color-swatch" data-color="#9b59b6" style="background:#9b59b6" title="紫"></button>
+            <button class="color-swatch" data-color="#333333" style="background:#333333" title="黒"></button>
+            <button class="color-swatch" data-color="#ffffff" style="background:#ffffff; border:1px solid #ccc" title="白"></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 画像モード -->
+    <section class="mode-panel hidden" id="imagePanel">
+      <div class="image-controls">
+        <div class="drop-zone" id="dropZone">
+          <p>画像をドラッグ＆ドロップ<br>またはクリックして選択</p>
+          <input type="file" id="imageInput" accept="image/*" hidden>
+        </div>
+        <div class="control-row">
+          <div class="control-group">
+            <label for="fitMode">フィット方法</label>
+            <select id="fitMode">
+              <option value="cover" selected>カバー（はみ出しカット）</option>
+              <option value="contain">コンテイン（全体表示）</option>
+              <option value="stretch">引き伸ばし</option>
+              <option value="fill">塗りつぶし（余白付き）</option>
+            </select>
+          </div>
+          <div class="control-group">
+            <label for="imgBgColor">余白の色</label>
+            <div class="color-input">
+              <input type="color" id="imgBgColor" value="#ffffff">
+              <label class="checkbox-label">
+                <input type="checkbox" id="imgBgTransparent" checked> 透明
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="control-group">
+          <label>丸角</label>
+          <div class="control-row">
+            <input type="range" id="borderRadius" min="0" max="50" value="0">
+            <span id="borderRadiusValue">0%</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- プレビュー & ダウンロード -->
+    <section class="preview-section">
+      <div class="preview-container">
+        <div class="preview-bg checkerboard">
+          <canvas id="previewCanvas" width="96" height="96"></canvas>
+        </div>
+        <div class="preview-info">
+          <span id="previewSize">96 × 96</span>
+          <span id="previewFileSize">-</span>
+        </div>
+      </div>
+      <div class="preview-samples">
+        <p>表示イメージ</p>
+        <div class="sample-sizes">
+          <div class="sample" title="リアクション表示サイズ (24px)">
+            <canvas class="sample-canvas" data-display="24"></canvas>
+            <span>24px</span>
+          </div>
+          <div class="sample" title="ボットアバター (36px)">
+            <canvas class="sample-canvas" data-display="36"></canvas>
+            <span>36px</span>
+          </div>
+          <div class="sample" title="サイドバー (48px)">
+            <canvas class="sample-canvas" data-display="48"></canvas>
+            <span>48px</span>
+          </div>
+          <div class="sample" title="詳細ページ (120px)">
+            <canvas class="sample-canvas" data-display="120"></canvas>
+            <span>120px</span>
+          </div>
+        </div>
+      </div>
+      <button class="download-btn" id="downloadBtn">ダウンロード (PNG)</button>
+    </section>
+  </main>
+
+  <footer>
+    <p>Lark 絵文字: 96×(96〜464)px / アプリアイコン: 240×240px / スタンプ: 400×400px</p>
+  </footer>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&family=M+PLUS+1p:wght@400;700;900&family=M+PLUS+Rounded+1c:wght@400;700;900&family=Noto+Sans+JP:wght@400;700;900&family=Noto+Serif+JP:wght@400;700;900&family=Sawarabi+Mincho&family=Zen+Maru+Gothic:wght@400;700;900&display=swap" rel="stylesheet">
+
+  <script src="src/app.js"></script>
+</body>
+</html>
